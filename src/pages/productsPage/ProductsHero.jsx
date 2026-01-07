@@ -12,7 +12,7 @@ const ProductsHero = () => {
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a] via-[#1a1a1a] to-amber-950/10" />
+      <div className="absolute inset-0 bg-linear-to-b from-[#1a1a1a] via-[#1a1a1a] to-amber-950/10" />
 
       <div className="max-w-7xl mx-auto relative z-10 text-center">
         <div className="inline-flex items-center gap-2 mb-8 px-6 py-2.5 border border-amber-500/30 bg-amber-500/5 rounded-full">
@@ -24,7 +24,7 @@ const ProductsHero = () => {
 
         <h1 className="text-6xl md:text-8xl font-light uppercase mb-8">
           Our <br />
-          <span className="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">
             Products
           </span>
         </h1>
