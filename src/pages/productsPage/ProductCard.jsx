@@ -1,4 +1,14 @@
+import { useCartStore } from "../../store/cart.store.jsx";
+import { useEffect } from "react";
+
+
+
 const ProductCard = ({ product }) => {
+  const addToCart = useCartStore((s) => s.addToCart);
+  const cart = useCartStore((s) => s.cart);
+
+
+
   return (
     <div className="group bg-linear-to-br from-gray-900 via-[#1a1a1a] to-gray-900 border border-amber-500/20 relative overflow-hidden flex flex-col w-64 h-[450px]">
       {/* Corner accents */}
@@ -27,7 +37,13 @@ const ProductCard = ({ product }) => {
             <span className="text-gray-500 text-xs uppercase">Price</span>
             <span className="text-amber-400 text-2xl">${product.product_price}</span>
           </div>
-          <button className="w-full py-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 uppercase text-sm">
+          <button   
+          className="w-full py-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 uppercase text-sm cursor-pointer hover:bg-amber-500/20 transition-all duration-300"
+          onClick={() => {
+              addToCart(product);  
+                                 
+            }}
+          >
             Add to Cart
           </button>
         </div>

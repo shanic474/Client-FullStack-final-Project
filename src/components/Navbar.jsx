@@ -1,10 +1,25 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useTheme } from '../context/ThemeContext'
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
+import { useModalStore } from "../store/modal.store.jsx";
 
 function Navbar() {
-  const [cartCount, setCartCount] = useState(0)
-  const { isDark, toggleTheme } = useTheme()
+  const { isDark, toggleTheme } = useTheme();
+  const openModal = useModalStore((s) => s.openModal);
+
+  // Mock user state (replace with real auth context or store)
+  const [user, setUser] = useState(null); // null = logged out, object = logged in
+
+  const handleLogin = () => {
+    // Toggle login state for demo
+    if (!user) setUser({ name: "John Doe" });
+    else setUser(null);
+  };
+
+  const handleSignUp = () => {
+    // Mock sign-up
+    setUser({ name: "Jane Doe" });
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#2a2a2a] via-[#2d2d2d] to-[#2a2a2a] transition-all duration-500">
@@ -50,7 +65,7 @@ function Navbar() {
             </a>
           </div>
 
-          {/* Cart & Theme Toggle */}
+          {/* Cart, Theme Toggle & User/Login */}
           <div className="flex items-center space-x-4">
             {/* Theme Toggle */}
             <button
@@ -70,22 +85,48 @@ function Navbar() {
             </button>
 
             {/* Cart */}
-            <button className="relative p-2.5 rounded-lg bg-amber-500/10 dark:bg-amber-400/10 text-amber-500 dark:text-amber-400 hover:bg-amber-500/20 dark:hover:bg-amber-400/20 border border-amber-500/20 dark:border-amber-400/30 transition-all duration-300">
+            <button
+              className="relative p-2.5 rounded-lg bg-amber-500/10 dark:bg-amber-400/10 text-amber-500 dark:text-amber-400 hover:bg-amber-500/20 dark:hover:bg-amber-400/20 border border-amber-500/20 dark:border-amber-400/30 transition-all duration-300"
+              onClick={() => openModal(true)}
+            >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-amber-500 to-yellow-500 text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold shadow-lg border border-amber-300">
-                  {cartCount}
-                </span>
-              )}
             </button>
+
+            {/* Login / SignUp or User */}
+            {user ? (
+              // Logged in: show user icon
+              <button
+                className="relative p-2.5 rounded-lg bg-amber-500/10 dark:bg-amber-400/10 text-amber-500 dark:text-amber-400 hover:bg-amber-500/20 dark:hover:bg-amber-400/20 border border-amber-500/20 dark:border-amber-400/30 transition-all duration-300"
+                title={user.name}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5.121 17.804A9.003 9.003 0 0112 15a9.003 9.003 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </button>
+            ) : (
+              // Not logged in: show Login & SignUp
+              <>
+                <Link
+                  to="/login"
+                  className="relative p-2.5 rounded-lg bg-amber-500/10 dark:bg-amber-400/10 text-amber-500 dark:text-amber-400 hover:bg-amber-500/20 dark:hover:bg-amber-400/20 border border-amber-500/20 dark:border-amber-400/30 transition-all duration-300"
+                >
+                  <span className="text-sm uppercase font-light tracking-wide">Login</span>
+                </Link>
+                <Link
+                  to="/register"
+                  className="relative p-2.5 rounded-lg bg-amber-500/10 dark:bg-amber-400/10 text-amber-500 dark:text-amber-400 hover:bg-amber-500/20 dark:hover:bg-amber-400/20 border border-amber-500/20 dark:border-amber-400/30 transition-all duration-300"
+                >
+                  <span className="text-sm uppercase font-light tracking-wide">SignUp</span>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
-export default Navbar
-
+export default Navbar;
