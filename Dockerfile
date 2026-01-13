@@ -1,14 +1,20 @@
-FROM node:18-alpine
+# Use Node 20 to satisfy Vite requirements
+FROM node:20-alpine
 
+# Set working directory
 WORKDIR /app
 
-COPY package*.json ./
+# Copy package.json and package-lock.json from the src folder
+COPY src/package*.json ./
+
+# Install dependencies
 RUN npm install
 
-COPY . .
+# Copy the rest of the client source code
+COPY src/ ./
 
-RUN npm run build
+# Expose the port Vite will use
+EXPOSE 5173
 
-EXPOSE 4173
-
-CMD ["npm", "run", "preview", "--", "--host"]
+# Run Vite dev server and allow external connections
+CMD ["npm", "run", "dev"]
