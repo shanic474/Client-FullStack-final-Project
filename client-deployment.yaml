@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Client
+      app: client
   template:
     metadata:
       labels:
-        app: Client
+        app: client
     spec:
       containers:
-        - name: client-container
-          image: s10shani/client:latest   # ← רק שורה אחת
-          imagePullPolicy: IfNotPresent
+        - name: client
+          image: s10shani/proj1:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
