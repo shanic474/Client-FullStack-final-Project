@@ -8,6 +8,6 @@ spec:
     app: client
   ports:
     - protocol: TCP
-      port: 80        
-      targetPort: 80  
-      nodePort: 31007
+      port: 5173        # Cluster port
+      targetPort: 5173  # Pod port
+      nodePort: 31007   # NodePort for external access
