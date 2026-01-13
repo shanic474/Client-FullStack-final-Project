@@ -13,8 +13,8 @@ spec:
         app: client
     spec:
       containers:
-        - name: client
-          image: s10shani/client-app:latest
+        - name: client-container
+          image: s10shani/client-fullstack:4
           imagePullPolicy: Always
           ports:
-            - containerPort: 4173
+            - containerPort: 5173
