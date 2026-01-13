@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Client
+  template:
+    metadata:
+      labels:
+        app: Client
+    spec:
+      containers:
+        - name: client-container
+          image: s10shani/client:latest   # ← רק שורה אחת
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
