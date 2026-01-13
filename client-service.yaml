@@ -10,4 +10,4 @@ spec:
     - protocol: TCP
       port: 5173        # Service port
       targetPort: 5173  # Container port
-      nodePort: 31007   # NodePort
+      # nodePort is omitted → k8s will assign a free port automatically
