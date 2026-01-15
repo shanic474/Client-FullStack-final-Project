@@ -2,25 +2,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useModalStore } from "../store/modal.store.jsx";
+import {useAuthStore} from '../store/auth.store.jsx';
 
 function Navbar() {
   const { isDark, toggleTheme } = useTheme();
   const openModal = useModalStore((s) => s.openModal);
-
-  // Mock user state (replace with real auth context or store)
-  const [user, setUser] = useState(null); // null = logged out, object = logged in
-
-  const handleLogin = () => {
-    // Toggle login state for demo
-    if (!user) setUser({ name: "John Doe" });
-    else setUser(null);
-  };
-
-  const handleSignUp = () => {
-    // Mock sign-up
-    setUser({ name: "Jane Doe" });
-  };
-
+  const user = useAuthStore((s) => s.user);
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#2a2a2a] via-[#2d2d2d] to-[#2a2a2a] transition-all duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +34,7 @@ function Navbar() {
               Products
               <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-amber-400 to-yellow-500 group-hover:w-full transition-all duration-500"></span>
             </Link>
-            <a href="#how-it-works" className="text-gray-400 dark:text-gray-300 hover:text-amber-400 dark:hover:text-amber-300 transition-all duration-300 font-light text-sm tracking-wide relative group uppercase">
+            {/* <a href="#how-it-works" className="text-gray-400 dark:text-gray-300 hover:text-amber-400 dark:hover:text-amber-300 transition-all duration-300 font-light text-sm tracking-wide relative group uppercase">
               Process
               <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-amber-400 to-yellow-500 group-hover:w-full transition-all duration-500"></span>
             </a>
@@ -62,7 +49,7 @@ function Navbar() {
             <a href="#reviews" className="text-gray-400 dark:text-gray-300 hover:text-amber-400 dark:hover:text-amber-300 transition-all duration-300 font-light text-sm tracking-wide relative group uppercase">
               Testimonials
               <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-amber-400 to-yellow-500 group-hover:w-full transition-all duration-500"></span>
-            </a>
+            </a> */}
           </div>
 
           {/* Cart, Theme Toggle & User/Login */}

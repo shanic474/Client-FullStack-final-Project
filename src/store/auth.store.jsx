@@ -1,22 +1,23 @@
 import { create } from "zustand";
-import { loginAuthUser, verifyCookieToken } from "../pages/loginPage/hooks/auth.login.jsx";
+import {  loginAuthUser, verifyCookieToken,} from "../pages/loginPage/hooks/auth.login.jsx";
 import { toast } from "react-toastify";
+import { useCartStore } from "./cart.store.jsx";
 
 export const useAuthStore = create((set) => ({
-  
   user: null,
   isAuthUser: null,
 
+  
   verifyCookie: async () => {
     console.log("verifyCookie called");
-
+    
     set({ user: null });
-
+    
     try {
       const user = await verifyCookieToken();
-
+      
       if (!user) throw new Error("No valid cookie found");
-
+      
       set({
         user: user,
         isAuthUser: true,
@@ -30,8 +31,9 @@ export const useAuthStore = create((set) => ({
       });
     }
   },
-
+  
   handleLogin: async (formData) => {
+    const clearCart = useCartStore((s) => s.clearCart);
     console.log("handleLogin called with:", formData);
 
     try {
@@ -40,7 +42,7 @@ export const useAuthStore = create((set) => ({
 
       if (!user) {
         set({ user: null, isAuthUser: false });
-        toast.error("You do not have access to the admin / manager dashboard.");
+        toast.error("Invalid email or password");
         return null;
       }
 
@@ -62,5 +64,6 @@ export const useAuthStore = create((set) => ({
       user: null,
       isAuthUser: false,
     });
-  }
+    useCartStore.getState().clearCart();
+  },
 }));
