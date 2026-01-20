@@ -27,6 +27,9 @@ const initialValues = {
   password: "",
   phone_number: "",
   user_role: "user",
+  age: null,
+  height_cm: null,
+  weight_kg: null
 };
 
 const RegisterForm = () => {
@@ -117,6 +120,45 @@ const RegisterForm = () => {
           />
           <ErrorMessage
             name="phone_number"
+            component="div"
+            className="text-red-500 text-sm"
+          />
+
+          <Field
+            name="age"
+            as={FormInput}
+            type="number"
+            label="Age"
+            placeholder="Enter your age"
+          />
+          <ErrorMessage
+            name="age"
+            component="div"
+            className="text-red-500 text-sm"
+          />
+
+          <Field
+            name="height_cm"
+            as={FormInput}
+            type="number"
+            label="Height (cm)"
+            placeholder="Enter your height in cm"
+          />
+          <ErrorMessage
+            name="height_cm"
+            component="div"
+            className="text-red-500 text-sm"
+          />
+
+          <Field
+            name="weight_kg"
+            as={FormInput}
+            type="number"
+            label="Weight (kg)"
+            placeholder="Enter your weight in kg"
+          />
+          <ErrorMessage
+            name="weight_kg"
             component="div"
             className="text-red-500 text-sm"
           />

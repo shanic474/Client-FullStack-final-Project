@@ -1,4 +1,4 @@
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/NAV/Navbar.jsx';
 import FormContainer from '../../components/shared/FormContainer';
 import FormHeader from '../../components/shared/FormHeader';
 import FormDivider from '../../components/shared/FormDivider';

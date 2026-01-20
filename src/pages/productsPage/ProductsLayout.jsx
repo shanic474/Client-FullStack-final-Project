@@ -1,20 +1,22 @@
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/NAV/Navbar";
 import ProductsHero from "./ProductsHero";
-import ProductsFilters from "./ProductsFilters";
-import ProductsSortBar from "./ProductsSortBar";
+import ProductsFiltersAndSort from "./ProductsFiltersAndSort";
 import ProductsGrid from "./ProductsGrid";
 import Footer from "./Footer";
+import UserBMI from "./UserBMI"; 
 
-const ProductsLayout = (products) => {
-    console.log("layout products: ", products.products);
-    
+const ProductsLayout = ({ products, categories }) => {
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white transition-colors duration-500">
       <Navbar />
-      <ProductsHero />
-      <ProductsFilters />
-      <ProductsSortBar />
-      <ProductsGrid products={products.products}/>
+      
+      <div className="w-[90%] mx-auto">
+        <ProductsHero />
+        <ProductsFiltersAndSort categories={categories} />
+        <UserBMI /> 
+        <ProductsGrid products={products} />
+      </div>
+      
       <Footer />
     </div>
   );

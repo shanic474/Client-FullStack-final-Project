@@ -1,6 +1,6 @@
 const ProductsHero = () => {
   return (
-    <section className="pt-32 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="pt-32 relative overflow-hidden">
       {/* Radial dotted background */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -16,7 +16,7 @@ const ProductsHero = () => {
       {/* Linear gradient overlay */}
       <div className="absolute inset-0 bg-linear-to-b from-[#1a1a1a] via-[#1a1a1a] to-amber-950/10" />
 
-      <div className="max-w-7xl mx-auto relative z-10 text-center">
+      <div className="relative z-10 text-center">
         {/* Premium collection badge */}
         <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 border border-amber-500/30 bg-amber-500/5 rounded-full">
           <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
@@ -32,11 +32,6 @@ const ProductsHero = () => {
             Products
           </span>
         </h1>
-
-        {/* Subtitle */}
-        <p className="text-lg sm:text-xl md:text-xl text-gray-400 max-w-2xl mx-auto font-light">
-          Meticulously curated ingredients with complete nutritional data.
-        </p>
       </div>
     </section>
   );

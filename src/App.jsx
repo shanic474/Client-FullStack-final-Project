@@ -3,23 +3,32 @@ import { useAuthStore } from "./store/auth.store.jsx";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { useCartStore } from "./store/cart.store.jsx";
+import { useUserStore } from "./store/user.store.jsx";
 
 function App() {
   const verifyCookie = useAuthStore((state) => state.verifyCookie);
   const user = useAuthStore((s) => s.user);
-  const hydrateCart = useCartStore((s) => s.hydrateCart);
   const isAuthChecked = useAuthStore((s) => s.isAuthUser);
+  const hydrateCart = useCartStore((s) => s.hydrateCart);
+  
+  // ✅ Import setUserInfo to calculate nutrients
+  const setUserInfo = useUserStore((s) => s.setUserInfo);
 
   useEffect(() => {
     verifyCookie();
   }, [verifyCookie]);
 
-  useEffect(() => {
-    hydrateCart(); 
-  }, [user, hydrateCart]);
+useEffect(() => {
+  if (user) {
+    setUserInfo({
+      height: user.height || 170,
+      weight: user.weight || 65,
+      age: user.age || 36
+    });
+  }
+}, [user, setUserInfo]);
 
 
-  // Show loading while verifying
   if (isAuthChecked === null) {
     return <div>Loading...</div>;
   }
@@ -28,8 +37,6 @@ function App() {
     <>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
       <Router />
-      
-
     </>
   );
 }

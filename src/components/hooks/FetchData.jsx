@@ -1,17 +1,14 @@
 import axios from "axios";
 
-export function FetchData(extension) {
-  console.log("fetchData extension",   `${import.meta.env.VITE_SERVER_URL}/${extension}/`);
-  
-  async function getAllData() {
+export function FetchData(extension) { 
+  async function getAllData(params = {}) {
     try {
-      console.log("getData called");
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_URL}/${extension}/`,
-        { withCredentials: true }
+        { params, withCredentials: true }
       );
       
-      return response.data[extension];
+      return response.data;
     } catch (error) {
       console.error(
         "getAllData error:",
@@ -19,7 +16,7 @@ export function FetchData(extension) {
         error.response?.data,
         error.message
       );
-      return null;
+      return { [extension]: [], total: 0, page: 1, limit: 4 };
     }
   }
   return { getAllData };

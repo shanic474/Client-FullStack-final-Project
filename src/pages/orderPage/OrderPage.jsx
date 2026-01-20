@@ -1,4 +1,4 @@
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/NAV/Navbar.jsx";
 import { useCartStore } from "../../store/cart.store.jsx";
 import OrderHeader from "./components/OrderHeader";
 import ShippingForm from "./components/ShippingForm";
