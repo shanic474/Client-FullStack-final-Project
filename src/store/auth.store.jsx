@@ -5,7 +5,7 @@ import { useCartStore } from "./cart.store.jsx";
 
 export const useAuthStore = create((set) => ({
   user: null,
-  isAuthUser: null,
+  isAuthUser: false,
 
   
   verifyCookie: async () => {
