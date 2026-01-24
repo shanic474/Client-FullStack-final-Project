@@ -1,29 +1,36 @@
 import ProductsLayout from "./ProductsLayout";
 import { FetchData } from "../../components/hooks/FetchData.jsx";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePaginationStore } from "../../store/pagination.store.jsx";
+import { useProductsStore } from "../../store/products.store.jsx";
 
 const ProductsPage = () => {
+  const products = useProductsStore((state) => state.products);
+  const setProducts = useProductsStore((state) => state.setProducts);
+
   const { getAllData: getProducts } = FetchData("products");
   const { getAllData: getCategories } = FetchData("categories");
 
-  const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
   const { currentPage, itemsPerPage, setTotalItems } = usePaginationStore();
 
-  // Fetch products for current page from server
+  // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await getProducts({ page: currentPage, limit: itemsPerPage });
-        setProducts(data.products || []);         
-        setTotalItems(data.total || 0);         
-        console.log("Fetched products data:", data.products, "Total items:", data.total);
+        const data = await getProducts({
+          page: currentPage,
+          limit: itemsPerPage,
+        });
+
+        setProducts(data.products || []);
+        setTotalItems(data.total || 0);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
+
     fetchProducts();
   }, [currentPage, itemsPerPage]);
 
@@ -31,19 +38,20 @@ const ProductsPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const categoriesData = await getCategories();
-        setCategories(categoriesData.categories || []);
+        const data = await getCategories();
+        setCategories(data.categories || []);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
+
     fetchCategories();
   }, []);
 
   return (
     <ProductsLayout
-      products={products || []}
-      categories={categories || []}
+      products={products}
+      categories={categories}
     />
   );
 };

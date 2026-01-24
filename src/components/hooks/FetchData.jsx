@@ -21,3 +21,4 @@ export function FetchData(extension) {
   }
   return { getAllData };
 }
+
