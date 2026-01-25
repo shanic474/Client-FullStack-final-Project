@@ -5,7 +5,7 @@ import ProductsPage from "../../pages/productsPage/ProductsPage.jsx";
 import LoginPage from "../../pages/loginPage/LoginPage.jsx";
 import RegisterPage from "../../pages/registerPage/RegisterPage.jsx";
 import OrderPage from "../../pages/orderPage/OrderPage.jsx";
-import AuthUserPages from "./AuthUserPages.jsx";
+import AuthUserPages from "./";
 import GuestPages from "./GuestPages.jsx";
 
 const router = createBrowserRouter(
